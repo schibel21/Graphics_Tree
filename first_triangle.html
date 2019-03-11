@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<div>
+        numBranches: 1<input id="numBranch" type="range"
+         min="0" max="3" step="1" value="0.5" />3
+        </div>
+<head>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+precision mediump float;
+
+attribute vec4 vPosition;
+attribute vec4 vColor;
+uniform float uTheta;
+
+varying vec4 v_color;
+uniform mat4 u_xForm;
+//uniform vec2 uTranslation;
+
+
+void main(){
+  v_color = vColor;
+
+  // create a rotation matrix
+  mat2 rotationZ =
+    mat2(
+      vec2(cos(uTheta), sin(uTheta)),
+      vec2(-sin(uTheta), cos(uTheta)));
+ vec2 pos = (rotationZ) * vPosition.xy;
+
+      gl_Position = u_xForm * vPosition; 
+     gl_Position = u_xForm * vec4(pos, 0, 1);
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 v_color;
+void main(){
+    gl_FragColor = v_color; 
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="first_triangle.js"></script>
+</head>
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>

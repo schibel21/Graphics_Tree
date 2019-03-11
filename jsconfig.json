@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "ES6"
+    },
+    "include": [
+        "first_triangle.html",
+         "first_triangle.js",
+        "../Common/*"
+    ]
+}
